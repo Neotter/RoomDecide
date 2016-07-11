@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
+    <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/json2.js')}}"></script>
+    <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+    <p class="a1">{{data.id}}</p>
+    <p class="a2"></p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-xs-6"><p align="center">Room A</p></div>
+            <div class="col-md-6 col-xs-6"><p align="center">Room B</p></div>
+        </div>
+    </div>
+</body>
+<script language="JavaScript">
+    function refresh(){
+        $.get("refresh",function(data,status){
+            var data = eval("("+data+")");
+            $(".a1").text(data.raw_data);
+            $(".a2").text(data.id);
+        })
+    }
+
+    $(document).ready(function(){
+        setInterval(function (){
+           refresh();
+        },2000);
+    })
+</script>
+</html>
